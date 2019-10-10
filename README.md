@@ -5,8 +5,6 @@ What does TaffyDAF do?
 TaffyDAF adds to the 'Join Multiplayer' showing the server's Day, current time, and weather.
 For example: Hate joining the world when its night and raining? Now you can know ahead of time and wait a few minutes before you join. 
 
-TaffyDAF example
-
 Where does this need to be(Server/Client)?
 This needs to be setup on the Server. Client side is not needed, however, a client may have the mod in the folder(it should do nothing).
 

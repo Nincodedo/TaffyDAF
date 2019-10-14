@@ -14,8 +14,12 @@ public class TaffyDAF {
 
     public TaffyDAF() {
         if(FMLEnvironment.dist.isDedicatedServer()) {
-            ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, Config.SERVER_CONFIG);
+            ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, Config.SERVER_CONFIG, "taffydaf-server.toml");
             Config.loadConfig(Config.SERVER_CONFIG, FMLPaths.CONFIGDIR.get().resolve("taffydaf-server.toml"));
+            Description.dimID = Config.dimID.get();
+            Description.enableDate = Config.enableDate.get();
+            Description.enableTime = Config.enableTime.get();
+            Description.enableWeather = Config.enableWeather.get();
             LOGGER.info("Server Side Detected - Setting Date and Forecast to Dim :" + Config.dimID.get());
         } else {
             LOGGER.info("Client Side Detected - Do nothing");

@@ -1,5 +1,6 @@
 package gerflargle.taffydaf;
 
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -20,6 +21,10 @@ public class TaffyDAF {
             Description.enableDate = Config.enableDate.get();
             Description.enableTime = Config.enableTime.get();
             Description.enableWeather = Config.enableWeather.get();
+            Description.enableSeason = Config.enableSeason.get();
+            if(!ModList.get().isLoaded("sereneseasons")) {
+                Description.enableSeason = false;
+            }
             LOGGER.info("Server Side Detected - Setting Date and Forecast to Dim :" + Config.dimID.get());
         } else {
             LOGGER.info("Client Side Detected - Do nothing");

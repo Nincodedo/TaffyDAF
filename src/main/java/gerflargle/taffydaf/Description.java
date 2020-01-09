@@ -10,6 +10,9 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.server.ServerLifecycleHooks;
 import org.apache.commons.lang3.StringUtils;
+import sereneseasons.handler.season.SeasonHandler;
+import sereneseasons.season.SeasonSavedData;
+import sereneseasons.season.SeasonTime;
 
 @Mod.EventBusSubscriber(modid = "taffydaf", value = Dist.DEDICATED_SERVER, bus = Mod.EventBusSubscriber.Bus.FORGE)
 class Description {
@@ -18,6 +21,7 @@ class Description {
     static Boolean enableDate;
     static Boolean enableTime;
     static Boolean enableWeather;
+    static Boolean enableSeason;
 
     @SubscribeEvent
     public static void modifyDescription(TickEvent.ServerTickEvent event) {
@@ -30,6 +34,7 @@ class Description {
             String upTime = "  \u00A79Up: \u00A7f";
             String time = "  \u00A73Time: ";
             String weather = "  \u00A76Weather: ";
+            String season = "";//\u00A76Season: ";
 
             if(enableDate) {
                 int dayCount = (int) (worldInfo.getDayTime() / 24000L % 2147483647L);
@@ -66,10 +71,34 @@ class Description {
                 }
                 newDescription += weather;
             }
+
+            if(enableSeason) {
+                SeasonSavedData seasonData = SeasonHandler.getSeasonSavedData(mcServer.getWorld(dim));
+                SeasonTime seasonTime = new SeasonTime(seasonData.seasonCycleTicks);
+                season = seasonTime.getSeason().toString();
+                switch(season) {
+                    case "SPRING":
+                        season = "\u00A7aSpring";
+                        break;
+                    case "SUMMER":
+                        season = "\u00A7eSummer";
+                        break;
+                    case "AUTUMN":
+                        season = "\u00A76Autumn";
+                        break;
+                    case "WINTER":
+                        season = "\u00A77Winter";
+                        break;
+                }
+                newDescription += "  \u00A7fSS: " + season;
+            }
             newDescription = StringUtils.trim(newDescription);
         } else {
             newDescription = "\u00A74There was an error fetching Dim " + dimID;
         }
+
+
+
         mcServer.getServerStatusResponse().setServerDescription(new StringTextComponent(mcServer.getMOTD() + "\n" + newDescription));
     }
 }

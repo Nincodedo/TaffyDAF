@@ -18,6 +18,7 @@ class Config {
     static final ForgeConfigSpec.ConfigValue<Boolean> enableDate;
     static final ForgeConfigSpec.ConfigValue<Boolean> enableTime;
     static final ForgeConfigSpec.ConfigValue<Boolean> enableWeather;
+    static final ForgeConfigSpec.ConfigValue<Boolean> enableSeason;
 
     static {
         SERVER_BUILDER.comment("General settings").push(CATEGORY_GENERAL);
@@ -35,6 +36,9 @@ class Config {
         enableWeather = SERVER_BUILDER
                 .comment("Should we show the Weather? [True/False]")
                 .define("enableWeather", true);
+        enableSeason = SERVER_BUILDER
+                .comment("Should we show the Season from SereneSeasons mod? [True/False]")
+                .define("enableSeason", true);
         SERVER_BUILDER.pop();
         SERVER_CONFIG = SERVER_BUILDER.build();
     }

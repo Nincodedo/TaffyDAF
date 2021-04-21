@@ -1,5 +1,5 @@
 # TaffyDAF
-For Forge 1.14.x - 1.15.2
+For Forge 1.14.x - 1.16.5
 
 What does TaffyDAF do?
 TaffyDAF adds to the 'Join Multiplayer' showing the server's Day, current time, and weather.

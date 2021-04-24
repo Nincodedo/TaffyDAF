@@ -33,13 +33,8 @@ public class Description {
                 String season = "  \u00A7f" + Config.labelSeason;
 
                 if (Config.enableDate) {
-                    int dayCount = (int)(worldInfo.getGameTime() / 24000L % Integer.MAX_VALUE);
-                    int years = (int)Math.floor((double)dayCount / 365.0);
-                    int days = dayCount % 365;
-                    if (years > 0) {
-                        upTime = upTime + years + Config.labelYears;
-                    }
-                    upTime = upTime + days + Config.labelDays;
+                    int dayCount = (int)(worldInfo.getDayTime() / 24000L % Integer.MAX_VALUE);
+                    upTime = upTime + dayCount + Config.labelDays;
                     newDescription = newDescription + upTime;
                 }
                 if (Config.enableTime) {
